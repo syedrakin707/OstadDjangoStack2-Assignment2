@@ -93,6 +93,8 @@ def save_file():
 
 
 def load_data():
+    students = []
+    courses = []
     with open("studentsData.json", "r") as studentsJSONFile:
         studentsJSON = json.load(studentsJSONFile)
         for x in studentsJSON:
@@ -111,7 +113,7 @@ def load_data():
             for test in courses:
                 if test.course_code == subject:
                     testCourse = test
-            testStudent.enroll_course(testCourse)
+            students[k].enroll_course(testCourse)
         for subject, grade in studentsJSON[k]['Grades'].items():
             students[k].add_grade(subject, grade)
 
@@ -121,7 +123,7 @@ def load_data():
             for test in students:
                 if test.student_id == enrolledStudent:
                     testStudent = test
-            testCourse.add_students(testStudent)
+            courses[l].add_students(testStudent)
     print("Data Loaded Successfully")
 
 
@@ -139,7 +141,6 @@ if __name__ == '__main__':
     print()
     students = []
     courses = []
-    testStudent = Student
     while True:
         option = int(input("Select Option: "))
         if option == 1:
@@ -227,12 +228,3 @@ if __name__ == '__main__':
         elif option == 0:
             print("Exiting Student Management System. Goodbye!")
             break
-
-        # with open("person.json", "w") as personJSONFile:
-        #     json.dump(person3OBJ, personJSONFile, indent=4)
-        #
-        # # JSON File Read to Python Object to JSON String
-        # with open("person.json", "r") as personOBJFile:
-        #     personOBJ = json.load(personOBJFile)
-        #     personJSON = json.dumps(personOBJ, indent=4)
-        #     print(personJSON)
